@@ -1,6 +1,7 @@
 # Handle user image and use of AI model
 import torch
 import torch.nn.functional as F
+from torchvision.models import efficientnet_b0
 from torchvision.transforms import v2 as T
 from PIL import Image
 import json
@@ -15,10 +16,13 @@ def load_artifacts():
     global __model
 
     if __model is None:
-        __model = torch.load("./model/efficientnet_b0_skin_cancer.pth")
+        __model = efficientnet_b0(pretrained=False, num_classes=7)
+
+        __model.load_state_dict(torch.load("../model/efficientnet_b0_skin_cancer.pth", map_location=torch.device("cpu")))
+    
         __model.eval() # Lets model know it is doing an evaluation
 
-    with open("./model/dx_mapping.json") as f:
+    with open("../model/dx_mapping.json") as f:
         __dx_mapping = json.load(f)
 
     print("Loading artifact is done")
