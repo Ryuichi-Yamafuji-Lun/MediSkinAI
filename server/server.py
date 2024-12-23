@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from server import util 
 
 app = FastAPI()
 
@@ -14,6 +15,13 @@ app.add_middleware(
     allow_headers=["*"], 
 )
 
+@app.on_event("startup")
+async def load_data():
+    util.load_artifacts()
+
 @app.post("/detect_skin_lesion")
-async def detect_skin_lesion():
-    pass
+async def detect_skin_lesion(file: UploadFile = File(...)):
+
+    result = util.get_skin_lesion(file.file)
+
+    return result
