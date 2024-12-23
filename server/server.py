@@ -21,7 +21,11 @@ async def load_data():
 
 @app.post("/detect_skin_lesion")
 async def detect_skin_lesion(file: UploadFile = File(...)):
+    try:
 
-    result = util.get_skin_lesion(file.file)
+        result = util.get_skin_lesion(file.file)
 
-    return result
+        return result
+    
+    finally:
+        await file.close() 
