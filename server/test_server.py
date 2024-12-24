@@ -3,7 +3,7 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 from server.server import app
-from server import util
+from server.util import load_artifacts, get_skin_lesion
 from PIL import Image
 import torch
 import io
@@ -13,7 +13,7 @@ client = TestClient(app)
 # Load artifacts before running tests
 @pytest.fixture(scope="session", autouse=True)
 def load_artifacts():
-    util.load_artifacts()
+    load_artifacts()
 
 @pytest.fixture
 def mock_util():

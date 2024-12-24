@@ -16,9 +16,9 @@ def load_artifacts():
     global __model
 
     if __model is None:
-        __model = efficientnet_b0(pretrained=False, num_classes=7)
+        __model = efficientnet_b0(weights=None, num_classes=7)
 
-        __model.load_state_dict(torch.load("../model/efficientnet_b0_skin_cancer.pth", map_location=torch.device("cpu")))
+        __model.load_state_dict(torch.load("../model/efficientnet_b0_skin_cancer.pth", map_location=torch.device("cpu"), weights_only=True))
     
         __model.eval() # Lets model know it is doing an evaluation
 

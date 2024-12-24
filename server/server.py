@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from server import util 
+from util import load_artifacts, get_skin_lesion
+
 #from slowapi import Limiter
 
 app = FastAPI()
@@ -18,7 +19,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def load_data():
-    util.load_artifacts()
+    load_artifacts()
 
 @app.post("/detect_skin_lesion")
 #@limiter.limit("5/minute")
@@ -32,7 +33,7 @@ async def detect_skin_lesion(file: UploadFile = File(...)):
 
     try:
 
-        result = util.get_skin_lesion(file.file)
+        result = get_skin_lesion(file.file)
 
         return result
     
