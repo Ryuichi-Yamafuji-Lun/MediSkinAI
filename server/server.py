@@ -25,7 +25,7 @@ async def load_data():
 #@limiter.limit("5/minute")
 async def detect_skin_lesion(file: UploadFile = File(...)):
     """
-    Upload an image file to detect the type of skin lesion.
+    Upload an image file to detect if skin lesion is cancer.
     
     - **file**: An image file (PNG, JPG, etc.) containing the skin lesion.
     - **Returns**: A JSON response with the diagnosis and confidence score.

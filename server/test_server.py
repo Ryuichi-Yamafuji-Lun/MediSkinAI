@@ -23,7 +23,7 @@ def mock_util():
 # Test for valid image input
 def test_detect_skin_lesion_valid_image(mock_util):
     mock_util.return_value = {
-        "diagnosis": "melanoma",
+        "diagnosis": "malignant",
         "confidence": 92.5
     }
 
@@ -35,7 +35,7 @@ def test_detect_skin_lesion_valid_image(mock_util):
     data = response.json()
     assert "diagnosis" in data
     assert "confidence" in data
-    assert data["diagnosis"] == "melanoma"
+    assert data["diagnosis"] == "malignant"
     assert data["confidence"] == 92.5
 
 # Test for missing file
@@ -45,10 +45,10 @@ def test_detect_skin_lesion_missing_file():
 
 # Test the utility function for get_skin_lesion
 def test_get_skin_lesion():
-    with patch("server.util.__model") as mock_model, patch("server.util.__dx_mapping") as mock_mapping:
+    with patch("server.util.__model") as mock_model, patch("server.util.__class_mapping") as mock_mapping:
         # Mock model and mapping behavior
         mock_model.return_value = torch.tensor([[0.1, 0.9]])
-        mock_mapping.__getitem__.return_value = "melanoma"
+        mock_mapping.__getitem__.return_value = "malignant"
 
         # Mock image loading and transformation
         mock_image = MagicMock()
@@ -60,5 +60,5 @@ def test_get_skin_lesion():
                 with io.BytesIO(b"fake_image_data") as image_file:
                     result = get_skin_lesion(image_file)
 
-                assert result["diagnosis"] == "melanoma"
+                assert result["diagnosis"] == "malignant"
                 assert 0 <= result["confidence"] <= 100
