@@ -23,7 +23,7 @@ const HowItWorksSection = () => {
         {/* Step 1 */}
         <div
           data-aos="fade-up"
-          data-aos-delay="500" 
+          data-aos-delay="400" 
           className="flex flex-col md:flex-row items-center mb-16"
         >
           <div className="w-full md:w-1/2 mb-4 md:mb-0">
@@ -46,7 +46,7 @@ const HowItWorksSection = () => {
         {/* Step 2 */}
         <div
           data-aos="fade-up"
-          data-aos-delay="700" // Delay for the next step
+          data-aos-delay="600" // Delay for the next step
           className="flex flex-col md:flex-row items-center mb-16"
         >
           <div className="w-full md:w-1/2 mb-4 md:mb-0">
@@ -69,7 +69,7 @@ const HowItWorksSection = () => {
         {/* Step 3 */}
         <div
           data-aos="fade-up"
-          data-aos-delay="900" // delay for the next step
+          data-aos-delay="800" // delay for the next step
           className="flex flex-col md:flex-row items-center"
         >
           <div className="w-full md:w-1/2 mb-4 md:mb-0">
