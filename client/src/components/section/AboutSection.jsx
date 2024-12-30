@@ -1,9 +1,23 @@
-import AboutImage from "../../assets/BrainImage.png"; 
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import AboutImage from "../../assets/BrainImage.png"; 
 
 const AboutSection = () => {
+        // Initialize AOS when the component mounts
+    useEffect(() => {
+        AOS.init({
+        duration: 1000, // Duration of the animation in ms
+        once: true, // Animation only happens once when the element is scrolled into view
+        });
+    }, []);
     return (
-        <div className="flex flex-col w-full md:flex-row items-center justify-center m-16 md:m-16 px-8 bg-white">
+        <div 
+            data-aos="fade-up"
+            data-aos-delay="200" 
+            className="flex flex-col w-full md:flex-row items-center justify-center m-16 md:m-16 px-8 bg-white"
+        >
             {/* Image */}
             <div className="md:w-1/2 p-2">
                 <img

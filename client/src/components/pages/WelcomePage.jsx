@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import WelcomeSection from "../section/WelcomeSection";
 import AboutSection from "../section/AboutSection";
 import HowItWorksSection from "../section/HowItWorksSection";
