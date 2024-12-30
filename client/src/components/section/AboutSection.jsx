@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AboutSection = () => {
     return (
-        <div className="flex flex-col md:flex-row items-center justify-center m-16 md:m-16 px-8">
+        <div className="flex flex-col w-full md:flex-row items-center justify-center m-16 md:m-16 px-8 bg-white">
             {/* Image */}
             <div className="md:w-1/2 p-2">
                 <img

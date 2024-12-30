@@ -1,6 +1,6 @@
 const AboutPage = () => {
     return (
-      <div className="bg-black">
+      <div >
         <h1>About Us</h1>
       </div>
     );

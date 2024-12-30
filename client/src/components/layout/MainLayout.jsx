@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import NavBar from "../Navbar";
+import Footer from "../Footer";
 import { useState, useEffect } from "react";
 
 const MainLayout = ({ children }) => {
@@ -16,13 +17,16 @@ const MainLayout = ({ children }) => {
 
     return (
         <div
-            className={`min-h-screen flex flex-col transition-colors duration-300 bg-blue-400`}
+            className={`min-h-screen flex flex-col transition-colors duration-300 bg-blue-100`}
         >
             {/* Navbar */}
             <NavBar isScrolled={isScrolled} />
 
             {/* Main Content */}
             <main className="flex-grow">{children}</main>
+
+            {/* Footer */}
+            <Footer />
         </div>
     );
 };
