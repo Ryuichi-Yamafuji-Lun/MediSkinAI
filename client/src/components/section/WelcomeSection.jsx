@@ -2,7 +2,7 @@ import HomeImage from "../../assets/HomeImage.png"
 
 const WelcomeSection = () => {
     return (
-        <div className="flex flex-col-reverse md:flex-row items-center m-16 md:m-16 px-8">
+        <div className="flex flex-col-reverse min-h-[calc(100vh-15rem)] md:flex-row items-center justify-center m-16 md:m-16 px-8" >
             {/* Text Content */}
             <div className="md:w-1/2 text-center md:text-left">
                 <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
