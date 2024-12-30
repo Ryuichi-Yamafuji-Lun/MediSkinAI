@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import HomeImage from "../../assets/HomeImage.png"
 
 const WelcomeSection = () => {
@@ -18,10 +19,9 @@ const WelcomeSection = () => {
                 Disclaimer: This platform is for educational purposes only and is not intended as a substitute for professional advice. For an accurate diagnosis or specific medical concerns, please consult a qualified healthcare provider.
                 </p>
 
-                {/* Change to ahref */}
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg">
-                Get Started
-                </button>
+                <Link to="/detection" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg">
+                    Get Started
+                </Link>
             </div>
 
             {/* Image */}
