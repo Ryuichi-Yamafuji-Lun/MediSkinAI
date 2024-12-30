@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import MainLayout from './components/layout/MainLayout';
 import WelcomePage from './components/pages/WelcomePage';
 import AboutPage from './components/pages/AboutPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout><WelcomePage /></MainLayout>} />
         <Route path="/about" element={<MainLayout><AboutPage /></MainLayout>} />
