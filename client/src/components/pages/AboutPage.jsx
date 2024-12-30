@@ -42,7 +42,7 @@ const AboutUsPage = () => {
                     <div className="md:w-1/2 text-center md:text-left">
                         <h2 className="text-4xl font-bold text-gray-800 mb-4">The Challenge</h2>
                         <p className="text-lg text-gray-600">
-                            Studies show that over 3 million non-melanoma skin cancer cases are diagnosed each year, and melanoma rates continue to rise globally. Despite these alarming statistics, many people delay seeking professional help due to fear, stigma, or lack of access. Our platform provides a non-intrusive way to assess skin health, giving users the confidence to consult a dermatologist if necessary.
+                            Studies show that over 3 million cases of skin cancer are diagnosed each year in the U.S, with rates of skin cancer continuing to rise globally. Despite these alarming statistics, many people delay seeking professional help due to fear, stigma, or lack of access. Our platform provides a non-intrusive way to assess skin health, giving users the confidence to consult a dermatologist if necessary.
                         </p>
                     </div>
                     <div className="md:w-1/2 p-4">
