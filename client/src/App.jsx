@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import MainLayout from './components/layout/MainLayout';
 import WelcomePage from './components/pages/WelcomePage';
 import AboutPage from './components/pages/AboutPage';
+import PrivacyPolicyPage from './components/pages/PrivacyPolicy';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout><WelcomePage /></MainLayout>} />
         <Route path="/about" element={<MainLayout><AboutPage /></MainLayout>} />
-
+        <Route path="/privacy-policy" element={<MainLayout><PrivacyPolicyPage /></MainLayout>} />
         {/* re-route nonexistent routes to welcome page */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
