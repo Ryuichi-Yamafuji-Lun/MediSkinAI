@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Logo from "../assets/Logo.png"
 
 const NavBar = ({ isScrolled }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,10 +15,15 @@ const NavBar = ({ isScrolled }) => {
             }`}
         >
             {/* Logo Section */}
-            <div className="text-2xl font-bold text-gray-800">
-                <a
-                    href="/"
-                >
+            <div className="text-2xl font-bold text-gray-800 flex items-center">
+                <a href="/" className="flex items-center">
+                    {/* Logo */}
+                    <img
+                        src={Logo}
+                        alt="Logo"
+                        className="h-8 w-8 mr-2"
+                    />
+                    {/* Text */}
                     MediSkinAI
                 </a>
             </div>
