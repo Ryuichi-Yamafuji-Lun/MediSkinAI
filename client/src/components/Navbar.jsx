@@ -1,7 +1,7 @@
 const NavBar = ({ isScrolled }) => {
     return (
         <nav
-            className={`w-full flex justify-between items-center px-8 py-4 sticky top-0 transition duration-300 ${
+            className={`w-full flex justify-between items-center px-8 py-4 sticky top-0 transition duration-300 z-50 ${
                 isScrolled
                     ? "bg-white shadow-lg"
                     : "bg-transparent"
