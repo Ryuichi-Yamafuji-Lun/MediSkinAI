@@ -4,6 +4,7 @@ import MainLayout from './components/layout/MainLayout';
 import WelcomePage from './components/pages/WelcomePage';
 import AboutPage from './components/pages/AboutPage';
 import PrivacyPolicyPage from './components/pages/PrivacyPolicy';
+import TermsAndConditionsPage from './components/pages/Terms';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<MainLayout><WelcomePage /></MainLayout>} />
         <Route path="/about" element={<MainLayout><AboutPage /></MainLayout>} />
         <Route path="/privacy-policy" element={<MainLayout><PrivacyPolicyPage /></MainLayout>} />
+        <Route path="/terms-and-conditions" element={<MainLayout><TermsAndConditionsPage /></MainLayout>} />
         {/* re-route nonexistent routes to welcome page */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
