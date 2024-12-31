@@ -79,24 +79,24 @@ const NavBar = ({ isScrolled }) => {
                 }`}
             >
                 <div className="flex flex-col space-y-4 py-4 px-8 items-center">
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
                     >
                         Home
-                    </a>
-                    <a
-                        href="/about"
+                    </Link>
+                    <Link
+                        to="/about"
                         className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
                     >
                         About
-                    </a>
-                    <a
-                        href="/detection"
+                    </Link>
+                    <Link
+                        to="/detection"
                         className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
                     >
                         Detection
-                    </a>
+                    </Link>
                 </div>
             </div>
         </nav>
