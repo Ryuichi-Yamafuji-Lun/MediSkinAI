@@ -18,7 +18,7 @@ def load_artifacts():
     if __model is None:
         __model = resnet50(weights=None, num_classes=2)
 
-        __model.load_state_dict(torch.load("../model/resnet50_skin_cancer.pth", map_location=torch.device("cpu"), weights_only=True))
+        __model.load_state_dict(torch.load("./model/resnet50_skin_cancer.pth", map_location=torch.device("cpu"), weights_only=True))
     
         __model.eval() # Lets model know it is doing an evaluation
 
