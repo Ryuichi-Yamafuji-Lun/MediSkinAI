@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from "../assets/Logo.png"
 
 const NavBar = ({ isScrolled }) => {
@@ -30,24 +31,24 @@ const NavBar = ({ isScrolled }) => {
 
             {/* Desktop Links Section */}
             <div className="hidden md:flex space-x-8">
-                <a
-                    href="/"
+                <Link
+                    to="/"
                     className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
                 >
                     Home
-                </a>
-                <a
-                    href="/about"
+                </Link>
+                <Link
+                    to="/about"
                     className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
                 >
                     About
-                </a>
-                <a
-                    href="/detection"
+                </Link>
+                <Link
+                    to="/detection"
                     className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
                 >
                     Detection
-                </a>
+                </Link>
             </div>
 
             {/* Mobile Menu Button */}
