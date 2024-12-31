@@ -1,7 +1,7 @@
 # MediSkinAI
 
 ## Link  
-(Link will be added once deployed)  
+<a href="https://mediskinai.vercel.app/" target="_blank">https://mediskinai.vercel.app/</a>
 
 ## Built with  
 - **Frontend**: React + Vite, styled with TailwindCSS  
@@ -68,5 +68,10 @@ If you are concerned about a skin lesion, consult a dermatologist immediately.
 
 ## Contact  
 If you have questions about this project, feel free to reach out.  
+
+## Deployment
+This project is deployed on:  
+- **Backend**: Render  
+- **Frontend**: Vercel 
 
 ---
