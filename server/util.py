@@ -22,7 +22,7 @@ def load_artifacts():
     
         __model.eval() # Lets model know it is doing an evaluation
 
-    with open("../model/class_mapping.json") as f:
+    with open("./model/class_mapping.json") as f:
         __class_mapping = json.load(f)
 
     print("Loading artifact is done")
