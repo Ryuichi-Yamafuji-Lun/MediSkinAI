@@ -47,7 +47,7 @@ const DetectionPage = () => {
             const formData = new FormData();
             formData.append("file", file);
 
-            const response = await fetch("http://localhost:8000/detect_skin_lesion", {
+            const response = await fetch("https://mediskinai.onrender.com/detect_skin_lesion", {
                 method: "POST",
                 body: formData,
             });
