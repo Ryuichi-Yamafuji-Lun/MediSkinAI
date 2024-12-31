@@ -58,13 +58,13 @@ const TermsAndConditionsPage = () => {
                         These Terms and Conditions are governed by the laws of the United States. Any disputes arising out of or in connection with these Terms shall be resolved in accordance with applicable local laws.
                     </p>
 
-                    <h2 className="text-3xl font-semibold text-gray-800">10. Contact Us</h2>
+                    {/* <h2 className="text-3xl font-semibold text-gray-800">10. Contact Us</h2>
                     <p className="text-lg text-gray-600">
                         If you have any questions or concerns regarding these Terms and Conditions, please contact us at:
                     </p>
                     <p className="text-lg text-gray-600 font-semibold">
                         Email: <a href="mailto:contact@mediskinai.com" className="text-blue-600">contact@mediskinai.com</a>
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </div>

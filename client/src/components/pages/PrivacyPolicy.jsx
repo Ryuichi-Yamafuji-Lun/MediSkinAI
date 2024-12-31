@@ -53,13 +53,13 @@ const PrivacyPolicyPage = () => {
                         We may update this Privacy Policy periodically. Changes will be posted on this page with an updated date at the top.
                     </p>
 
-                    <h2 className="text-3xl font-semibold text-gray-800">9. Contact Us</h2>
+                    {/* <h2 className="text-3xl font-semibold text-gray-800">9. Contact Us</h2>
                     <p className="text-lg text-gray-600">
                         If you have any questions regarding this Privacy Policy or how we handle your data, please contact us at:
                     </p>
                     <p className="text-lg text-gray-600 font-semibold">
                         Email: <a href="mailto:contact@mediskinai.com" className="text-blue-600">contact@mediskinai.com</a>
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </div>
