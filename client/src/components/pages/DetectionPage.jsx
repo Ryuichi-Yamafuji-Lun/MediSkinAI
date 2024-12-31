@@ -10,6 +10,8 @@ const DetectionPage = () => {
     const [dragging, setDragging] = useState(false);
     const navigate = useNavigate();
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
 
     const handleFileChange = (e) => {
@@ -47,7 +49,7 @@ const DetectionPage = () => {
             const formData = new FormData();
             formData.append("file", file);
 
-            const response = await fetch("https://mediskinai.onrender.com/detect_skin_lesion", {
+            const response = await fetch(`${API_BASE_URL}/detect_skin_lesion`, {
                 method: "POST",
                 body: formData,
             });
