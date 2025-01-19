@@ -11,7 +11,6 @@ import TermsAndConditionsPage from './components/pages/Terms';
 import ScrollToTop from './components/ScrollToTop';
 
 const Tracking_ID = import.meta.env.VITE_GOOGLE_TRACKING_ID;
-console.log(Tracking_ID)
 ReactGA.initialize(Tracking_ID);
 
 
