@@ -18,6 +18,7 @@ function AnalyticsTracker() {
   const location = useLocation();
 
   useEffect(() => {
+    console.log("Analytics started")
     const path = location.pathname + location.search;
 
     // Log pageview
