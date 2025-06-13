@@ -7,7 +7,7 @@
 
 ## 🩺 Overview
 
-**MediSkinAI** is a full-stack AI-powered web application that classifies user-submitted dermoscopic skin lesion images as **benign or malignant**. Built with a mission to support early detection of melanoma, this project was inspired by my family's personal history with skin cancer and my desire to democratize access to AI-driven health screening tools.
+**MediSkinAI** is a full-stack AI-powered web application that classifies user-submitted dermoscopic skin lesion images as **benign or malignant**. Inspired by my family’s history with skin cancer, I built MediSkinAI to explore how AI can aid early melanoma detection for underserved populations.
 
 ---
 
