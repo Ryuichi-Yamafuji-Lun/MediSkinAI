@@ -62,10 +62,10 @@ const ResultPage = () => {
                 </div>
                 <div className="text-center">
                     <button
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/detection")}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
                     >
-                        Go Back
+                        Analyze Another Image
                     </button>
                 </div>
             </div>
