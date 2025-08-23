@@ -1,102 +1,105 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../assets/Logo.png"
+import { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import Logo from "../assets/Logo.png";
 
 const NavBar = ({ isScrolled }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMenuOpen]);
+
+    const navLinks = [
+        { to: "/", label: "Home" },
+        { to: "/about", label: "About" },
+    ];
+
+
+    const activeLinkStyle = {
+      color: '#2563eb', 
+      fontWeight: '600',
     };
 
     return (
         <nav
-            className={`w-full flex justify-between items-center px-8 py-4 sticky top-0 transition duration-300 z-50 ${
-                isScrolled ? "bg-white shadow-lg" : "bg-transparent"
+            className={`sticky top-0 z-50 w-full flex items-center justify-between px-4 sm:px-8 py-4 transition-colors duration-300 ease-in-out ${
+                isScrolled || isMenuOpen ? "bg-white shadow-md" : "bg-transparent"
             }`}
         >
             {/* Logo Section */}
-            <div className="text-2xl font-bold text-gray-800 flex items-center">
-                <a href="/" className="flex items-center">
-                    {/* Logo */}
-                    <img
-                        src={Logo}
-                        alt="Logo"
-                        className="h-8 w-8 mr-2"
-                    />
-                    {/* Text */}
-                    MediSkinAI
-                </a>
-            </div>
+            <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-slate-800">
+                <img src={Logo} alt="MediSkinAI Logo" className="h-8 w-auto" />
+                MediSkinAI
+            </Link>
 
-            {/* Desktop Links Section */}
-            <div className="hidden md:flex space-x-8">
-                <Link
-                    to="/"
-                    className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
-                >
-                    Home
-                </Link>
-                <Link
-                    to="/about"
-                    className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
-                >
-                    About
-                </Link>
-                <Link
+            {/* Desktop Links & CTA */}
+            <div className="hidden md:flex items-center gap-6">
+                {navLinks.map((link) => (
+                    <NavLink
+                        key={link.to}
+                        to={link.to}
+                        style={({ isActive }) => isActive ? activeLinkStyle : undefined}
+                        className="text-slate-600 hover:text-blue-600 transition-colors duration-200"
+                    >
+                        {link.label}
+                    </NavLink>
+                ))}
+                <NavLink
                     to="/detection"
-                    className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
+                    className="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 shadow-sm transition-all duration-200"
                 >
-                    Detection
-                </Link>
+                    Start Detection
+                </NavLink>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button (Hamburger/Close Icon) */}
             <button
-                className="md:hidden text-gray-800 focus:outline-none"
-                onClick={toggleMenu}
+                className="md:hidden z-50 text-slate-800"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-controls="mobile-menu"
+                aria-expanded={isMenuOpen}
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-                <svg
-                    className="w-6 h-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 6h16M4 12h16M4 18h16"
-                    />
-                </svg>
+                <div className="w-6 h-6 flex flex-col justify-around">
+                    <span className={`block h-0.5 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
+                    <span className={`block h-0.5 bg-current transition duration-300 ease-in-out ${isMenuOpen ? "opacity-0" : ""}`} />
+                    <span className={`block h-0.5 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+                </div>
             </button>
 
             {/* Mobile Dropdown Menu */}
             <div
-                className={`absolute top-full left-0 w-full bg-white shadow-lg rounded-lg transition-all duration-300 ease-in-out overflow-hidden ${
-                    isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+                id="mobile-menu"
+                className={`absolute top-0 left-0 w-full h-screen bg-white transform transition-transform duration-300 ease-in-out md:hidden ${
+                    isMenuOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
             >
-                <div className="flex flex-col space-y-4 py-4 px-8 items-center">
-                    <Link
-                        to="/"
-                        className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        to="/about"
-                        className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
-                    >
-                        About
-                    </Link>
-                    <Link
+                <div className="flex flex-col items-center justify-center h-full gap-8 text-xl">
+                    {navLinks.map((link) => (
+                        <NavLink
+                            key={link.to}
+                            to={link.to}
+                            onClick={() => setIsMenuOpen(false)}
+                            style={({ isActive }) => isActive ? activeLinkStyle : undefined}
+                            className="text-slate-600"
+                        >
+                            {link.label}
+                        </NavLink>
+                    ))}
+                    <NavLink
                         to="/detection"
-                        className="text-gray-800 font-medium hover:text-gray-500 transition duration-300"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-full"
                     >
-                        Detection
-                    </Link>
+                        Start Detection
+                    </NavLink>
                 </div>
             </div>
         </nav>
