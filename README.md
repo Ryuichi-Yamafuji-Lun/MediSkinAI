@@ -17,7 +17,7 @@
 - Applied **class-weighted loss** to counter dataset imbalance (~85% benign, ~15% malignant), achieving **91% test accuracy**.
 - Built a responsive frontend using **React + Vite + TailwindCSS**.
 - Developed a secure backend using **FastAPI**, with automatic deletion of uploaded images post-inference for user privacy.
-- Deployed to production on **Render (backend)** and **Vercel (frontend)**.
+- Deployed to production on **Google Cloud Run (backend)** and **Vercel (frontend)**.
 - Collected feedback from **27+ early users**, iterating on UI and mobile accessibility.
 
 ---
@@ -30,7 +30,7 @@
 | Backend       | FastAPI (Python) |
 | AI Model      | PyTorch (ResNet50 CNN) |
 | Dataset       | ISIC 2020 Challenge Dataset (~33K dermoscopic images) |
-| Deployment    | Vercel (frontend), Render (backend) |
+| Deployment    | Vercel (frontend), Google Cloud Run (backend) |
 
 ---
 
