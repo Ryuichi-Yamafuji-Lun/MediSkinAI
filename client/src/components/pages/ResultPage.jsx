@@ -1,4 +1,4 @@
-import { useEffect } from "react"; // <-- FIX: Added useEffect import
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // --- SVG Icons for visual feedback ---
@@ -26,30 +26,30 @@ const ResultPage = () => {
         }
     }, [result, navigate]);
 
-    // The early return now happens *after* all hooks have been called.
     if (!result) {
-        return null; // Render nothing while the effect redirects
+        return null;
     }
 
-    const { diagnosis, confidence } = result;
-    const isMalignant = diagnosis.toLowerCase() === "malignant";
+    // Deconstruct the new state keys: classification and explanation
+    const { classification, confidence, explanation } = result;
+    const isMalignant = classification.toLowerCase() === "malignant";
     const confidencePercent = confidence.toFixed(2);
 
     // --- Theme object for dynamic styling ---
     const theme = isMalignant ? {
-            primaryColor: "text-amber-600",
-            bgColor: "bg-amber-50",
-            ringColor: "ring-amber-200",
-            icon: <ExclamationTriangleIcon />,
-            title: "Potential Concern",
-            advice: "A result of 'Malignant' indicates that the lesion shows characteristics that require medical attention. Please consult a dermatologist promptly for a professional diagnosis and guidance.",
-        } : {
-            primaryColor: "text-green-600",
-            bgColor: "bg-green-50",
-            ringColor: "ring-green-200",
-            icon: <CheckCircleIcon />,
-            title: "Appears Benign",
-            advice: "A result of 'Benign' suggests the lesion is likely non-cancerous. However, it is always best to monitor your skin for any changes and consult a doctor for regular check-ups.",
+        primaryColor: "text-amber-600",
+        bgColor: "bg-amber-50",
+        ringColor: "ring-amber-200",
+        icon: <ExclamationTriangleIcon />,
+        title: "Analysis Suggests a High-Risk Classification",
+        advice: "A classification of 'Malignant' means the AI has identified characteristics that require a professional medical evaluation.",
+    } : {
+        primaryColor: "text-green-600",
+        bgColor: "bg-green-50",
+        ringColor: "ring-green-200",
+        icon: <CheckCircleIcon />,
+        title: "Analysis Suggests a Low-Risk Classification",
+        advice: "A classification of 'Benign' indicates the lesion is likely non-cancerous. It is always best to monitor your skin for any changes.",
     };
 
     const radius = 50;
@@ -72,7 +72,7 @@ const ResultPage = () => {
                     {/* --- Confidence Gauge --- */}
                     <div className="flex flex-col sm:flex-row items-center justify-around gap-6">
                         <div className="relative w-32 h-32 flex items-center justify-center">
-                             <svg className="transform -rotate-90" width="100%" height="100%" viewBox="0 0 120 120">
+                            <svg className="transform -rotate-90" width="100%" height="100%" viewBox="0 0 120 120">
                                 <circle cx="60" cy="60" r={radius} strokeWidth="10" className="text-slate-200" fill="transparent" />
                                 <circle
                                     cx="60" cy="60" r={radius} strokeWidth="10" fill="transparent"
@@ -92,11 +92,19 @@ const ResultPage = () => {
                     
                     <hr/>
                     
+                    {/* --- LLM Explanation Section --- */}
+                    <div className="p-6">
+                        <h2 className="text-xl font-semibold text-slate-800 mb-4">AI Assistant Explanation</h2>
+                        <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">{explanation}</p>
+                    </div>
+                    
+                    <hr/>
+                    
                     {/* --- Next Steps & Resources --- */}
                     <div>
                         <h2 className="text-xl font-semibold text-slate-800 mb-4">Next Steps & Resources</h2>
                         <div className="space-y-4">
-                             <a href="https://www.aad.org/public/fad" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-blue-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-blue-700 transition-all">
+                            <a href="https://www.aad.org/public/fad" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-blue-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-blue-700 transition-all">
                                 Find a Dermatologist Near You
                             </a>
                             <a href="https://www.skincancer.org/" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-slate-200 text-slate-800 font-bold py-3 px-4 rounded-lg hover:bg-slate-300 transition-all">
@@ -105,7 +113,7 @@ const ResultPage = () => {
                         </div>
                     </div>
 
-                     <hr/>
+                    <hr/>
 
                     <div className="text-center">
                         <button
