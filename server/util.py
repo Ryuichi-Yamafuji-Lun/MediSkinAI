@@ -5,6 +5,7 @@ from torchvision.models import resnet50
 from torchvision.transforms import v2 as T
 from PIL import Image
 import json
+import io
 
 __class_mapping = None
 __model = None
@@ -27,7 +28,11 @@ def load_artifacts():
 
     print("Loading artifact is done")
 
-def get_skin_lesion(image_file):
+def get_skin_lesion(image_bytes: bytes):
+
+    # Create an in-memory file from the binary data
+    image_file = io.BytesIO(image_bytes) 
+
     try:
         image = Image.open(image_file).convert("RGB")
 
