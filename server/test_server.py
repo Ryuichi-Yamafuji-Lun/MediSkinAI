@@ -23,7 +23,7 @@ def mock_util():
 # Test for valid image input
 def test_detect_skin_lesion_valid_image(mock_util):
     mock_util.return_value = {
-        "diagnosis": "malignant",
+        "classification": "malignant",
         "confidence": 92.5
     }
 
@@ -33,9 +33,9 @@ def test_detect_skin_lesion_valid_image(mock_util):
 
     assert response.status_code == 200
     data = response.json()
-    assert "diagnosis" in data
+    assert "classification" in data
     assert "confidence" in data
-    assert data["diagnosis"] == "malignant"
+    assert data["classification"] == "malignant"
     assert data["confidence"] == 92.5
 
 # Test for missing file
@@ -60,5 +60,5 @@ def test_get_skin_lesion():
                 with io.BytesIO(b"fake_image_data") as image_file:
                     result = get_skin_lesion(image_file)
 
-                assert result["diagnosis"] == "malignant"
+                assert result["classification"] == "malignant"
                 assert 0 <= result["confidence"] <= 100
