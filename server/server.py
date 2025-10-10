@@ -35,9 +35,15 @@ async def detect_skin_lesion(file: UploadFile = File(...)):
     try:
         image_bytes = await file.read()
 
-        result = mediskinai_graph_app.invoke({"image": image_bytes})
+        result = mediskinai_graph_app.invoke({"image_data": image_bytes})
 
-        return result
+        final_response = {
+            "classification": result.get("classification"),
+            "confidence": result.get("confidence"),
+            "explanation": result.get("explanation")
+        }
+
+        return final_response
     
     finally:
         await file.close() 

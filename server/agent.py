@@ -14,7 +14,7 @@ load_dotenv()
 
 # define state of the graph
 class GraphState(TypedDict):
-    image: bytes
+    image_data: bytes
     classification: str
     confidence: float
     explanation: str
@@ -22,13 +22,17 @@ class GraphState(TypedDict):
 # CNN node
 @tool
 def skin_lesion_classifier_tool(image_data: bytes)-> dict:
+    """
+    Analyzes an image of a skin lesion using a CNN model and
+    returns a classification and confidence level.
+    """
     return util.get_skin_lesion(image_data)
 
 # LLM reasoning
 def llm_reasoning_node(state: GraphState):
     try:
         # load LLM 
-        llm = init_chat_model("openai:gpt-4.1")
+        llm = init_chat_model("openai:gpt-4o-mini")
     except Exception as e:
         print(f"LLM initialization failed: {e}")
         return {"explanation": "I'm sorry, an issue occurred with our AI model. Please try again later."}
