@@ -21,7 +21,7 @@ class GraphState(TypedDict):
 
 # CNN node
 @tool
-def skin_lesion_detection_tool(image_data: bytes)-> dict:
+def skin_lesion_classifier_tool(image_data: bytes)-> dict:
     return util.get_skin_lesion(image_data)
 
 # LLM reasoning
@@ -63,4 +63,16 @@ def llm_reasoning_node(state: GraphState):
     explanation = llm.invoke(prompt)
     return {"explanation": explanation.content}
 
+# create instance of StateGraph
+mediskinai_graph_builder = StateGraph(GraphState)
 
+# add the nodes of mediskin
+mediskinai_graph_builder.add_node("image_processing", skin_lesion_classifier_tool)
+mediskinai_graph_builder.add_node("llm_reasoning", llm_reasoning_node)
+
+# add edges
+mediskinai_graph_builder.add_edge(START, "image_processing")
+mediskinai_graph_builder.add_edge("image_processing", "llm_reasoning")
+mediskinai_graph_builder.add_edge("llm_reasoning", END)
+
+mediskinai_graph_app = mediskinai_graph_builder.compile()
