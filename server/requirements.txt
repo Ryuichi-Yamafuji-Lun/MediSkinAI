@@ -5,3 +5,7 @@ fastapi==0.115.4
 uvicorn==0.32.0
 python-multipart
 aiofiles
+langgraph
+langchain
+langchain-openai
+python-dotenv

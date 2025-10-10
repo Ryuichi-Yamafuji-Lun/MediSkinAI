@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import util
-
+from agent import mediskinai_graph_app
 #from slowapi import Limiter
 
 app = FastAPI()
@@ -29,12 +29,13 @@ async def detect_skin_lesion(file: UploadFile = File(...)):
     Upload an image file to detect if skin lesion is cancer.
     
     - **file**: An image file (PNG, JPG, etc.) containing the skin lesion.
-    - **Returns**: A JSON response with the diagnosis and confidence score.
+    - **Returns**: A JSON response with the classification and confidence score.
     """
 
     try:
+        image_bytes = await file.read()
 
-        result = util.get_skin_lesion(file.file)
+        result = mediskinai_graph_app.invoke({"image": image_bytes})
 
         return result
     
