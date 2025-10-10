@@ -53,10 +53,10 @@ def get_skin_lesion(image_bytes: bytes):
             predicted_class = probabilities.argmax().item()
 
         # retrieve specific skin lesion and confidence level
-        diagnosis = __class_mapping[str(predicted_class)]
+        classification = __class_mapping[str(predicted_class)]
         confidence = probabilities[0, predicted_class].item() * 100
 
-        return {"diagnosis": diagnosis, "confidence": confidence}
+        return {"classification": classification, "confidence": confidence}
     
     finally:
         image_file.close()  # Close the file
