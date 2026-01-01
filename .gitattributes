@@ -8,3 +8,4 @@
 *.css linguist-vendored
 *.html linguist-vendored
 *.json linguist-vendored
+*.ipynb linguist-vendored
