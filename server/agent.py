@@ -5,7 +5,8 @@ import util
 
 # langgraph/chain dependencies
 from langgraph.graph import StateGraph, START, END
-from langchain.chat_models import init_chat_model
+#from langchain.chat_models import init_chat_model
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.tools import tool
 from langchain.prompts import ChatPromptTemplate
 
@@ -32,7 +33,10 @@ def skin_lesion_classifier_tool(image_data: bytes)-> dict:
 def llm_reasoning_node(state: GraphState):
     try:
         # load LLM 
-        llm = init_chat_model("openai:gpt-4o-mini")
+        llm = ChatGoogleGenerativeAI(
+            model="gemini-1.5-flash",
+            temperature=0
+        )
     except Exception as e:
         print(f"LLM initialization failed: {e}")
         return {"explanation": "I'm sorry, an issue occurred with our AI model. Please try again later."}

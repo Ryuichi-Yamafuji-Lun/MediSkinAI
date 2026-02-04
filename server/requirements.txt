@@ -7,5 +7,6 @@ python-multipart
 aiofiles
 langgraph
 langchain
-langchain-openai
+#langchain-openai
+langchain-google-genai
 python-dotenv
