@@ -9,4 +9,6 @@ langgraph
 langchain
 #langchain-openai
 langchain-google-genai
+langchain-core
 python-dotenv
+opencv-python-headless

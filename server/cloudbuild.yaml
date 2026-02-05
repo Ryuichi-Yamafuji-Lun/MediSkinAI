@@ -1,13 +1,13 @@
 steps:
-# Build the Docker image
+# 1. Build the Docker image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/skin-lesion-service:v1.0.0', '.']
 
-# Push the image to Google Container Registry
+# 2. Push the image to Google Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/skin-lesion-service:v1.0.0']
 
-# Deploy the image to Cloud Run
+# 3. Deploy to Cloud Run (WITH SAFETY FIXES)
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args:
@@ -21,3 +21,9 @@ steps:
   - '--region'
   - 'us-west1'
   - '--allow-unauthenticated'
+  - '--memory'
+  - '4Gi'      
+  - '--timeout'
+  - '300'       
+  - '--cpu'
+  - '2'         

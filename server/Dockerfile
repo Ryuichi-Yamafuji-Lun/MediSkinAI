@@ -12,6 +12,7 @@ FROM gcr.io/distroless/python3-debian12
 
 WORKDIR /app
 
+ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app:/app/deps
 
 COPY --from=builder /app/deps ./deps

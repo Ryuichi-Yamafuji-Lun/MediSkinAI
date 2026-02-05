@@ -1,8 +1,12 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 import util
 from agent import mediskinai_graph_app
 #from slowapi import Limiter
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -20,7 +24,14 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def load_data():
-    util.load_artifacts()
+    try:
+        logger.info("⏳ Attempting to load artifacts...")
+        util.load_artifacts()
+        logger.info("✅ Artifacts loaded successfully!")
+    except Exception as e:
+        logger.error(f"🔥 CRITICAL STARTUP ERROR: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
 
 @app.post("/detect_skin_lesion")
 #@limiter.limit("5/minute")
