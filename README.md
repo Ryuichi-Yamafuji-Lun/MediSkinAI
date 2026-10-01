@@ -14,7 +14,7 @@
 ## 👨‍💻 My Role (AI Engineer, Sept 2024 – Jan 2025)
 
 - **Fine-tuned** an ImageNet-pretrained **ResNet50** in **PyTorch** on the **ISIC 2020 Challenge Dataset** (33,126 images).
-- Applied **class-weighted loss** to counter severe class imbalance (**32,542 benign / 584 malignant — a 56:1 ratio**), achieving **91% test accuracy**.
+- Applied **class-weighted loss** to counter severe class imbalance (**32,542 benign / 584 malignant — a 56:1 ratio**), trading raw accuracy for malignant sensitivity, the right tradeoff for a screening tool.
 - Built a responsive frontend using **React + Vite + TailwindCSS**.
 - Developed a secure backend using **FastAPI**, with automatic deletion of uploaded images post-inference for user privacy.
 - Deployed to production on **Google Cloud Run (backend)** and **Vercel (frontend)**.
@@ -42,7 +42,7 @@
 - **Dataset**: ISIC 2020 (research-grade, widely used in academic publications)  
 - **Class balance**: 32,542 benign / 584 malignant — **1.8% positive rate (56:1)**  
 - **Test split**: 6,626 images, 120 malignant  
-- **Test Accuracy**: **91%**  
+- **Test Accuracy**: 91% (not a meaningful metric at 56:1, see the note below)  
 - **Imbalance Handling**: Applied **class-weighted loss** to boost malignant classification
 
 > **On reading the accuracy number:** a trivial classifier that always predicts "benign" scores **98.2%** on this split. Accuracy is therefore *not* a meaningful metric for this dataset — class-weighted loss intentionally trades overall accuracy for malignant sensitivity, which is the correct tradeoff for a screening tool. **Malignant recall and ROC-AUC are the metrics that matter here, and are pending re-evaluation.**
