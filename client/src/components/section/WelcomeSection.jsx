@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import HomeImage from "../../assets/HomeImage.png";
+import HomeImage from "../../assets/HomeImage.webp";
 
 const ArrowRightIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -20,24 +20,24 @@ const WelcomeSection = () => {
     }, []);
 
     return (
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 min-h-[calc(100vh-5rem)] flex items-center">
-            <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-0 lg:min-h-[calc(100vh-5rem)] flex items-center">
+            <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16 items-center">
                 
                 {/* Text Content */}
                 <div data-aos="fade-right" className="text-center lg:text-left">
-                    <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
+                    <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
                         Early Detection,
                         <span className="block text-blue-600">Peace of Mind.</span>
                     </h1>
                     
-                    <p className="mt-6 text-lg leading-8 text-slate-600">
+                    <p className="mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">
                         Worried about a mole or skin change? Upload a photo to get an instant AI analysis, indicating potential concerns and confidence levels.
                     </p>
                     
                     <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                         <Link 
                             to="/detection" 
-                            className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-200"
+                            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-200"
                         >
                             Get Started
                             <ArrowRightIcon />
@@ -54,7 +54,9 @@ const WelcomeSection = () => {
                     <img
                         src={HomeImage}
                         alt="An abstract illustration of AI assisting with medical diagnostics on a screen"
-                        className="w-full max-w-md lg:max-w-none h-auto animate-float"
+                        width="1200"
+                        height="686"
+                        className="w-full max-w-sm sm:max-w-md lg:max-w-none h-auto motion-safe:animate-float"
                     />
                 </div>
             </div>

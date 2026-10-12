@@ -11,14 +11,15 @@ const MainLayout = ({ children }) => {
             setIsScrolled(window.scrollY > 50);
         };
 
-        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     return (
-        <div
-            className={`min-h-screen flex flex-col transition-colors duration-300 bg-blue-100`}
-        >
+        // overflow-x-clip stops AOS slide-in animations from causing sideways scroll on mobile
+        // (overflow-hidden would break the sticky navbar)
+        <div className="min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip bg-blue-100">
             {/* Navbar */}
             <NavBar isScrolled={isScrolled} />
 

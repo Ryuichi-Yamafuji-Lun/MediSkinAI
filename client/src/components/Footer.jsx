@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-100 text-black py-8 mt-16">
+        <footer className="bg-gray-100 text-black py-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
             <div className="max-w-screen-xl mx-auto px-4 text-center">
                 {/* Legal Links */}
-                <div className="mb-6">
-                    <Link to="/privacy-policy" className="hover:text-white mr-4">
+                <div className="mb-6 flex flex-wrap justify-center gap-x-6 gap-y-2">
+                    <Link to="/privacy-policy" className="py-2 hover:text-blue-600 hover:underline">
                         Privacy Policy
                     </Link>
-                    <Link to="/terms-and-conditions" className="hover:text-white">
+                    <Link to="/terms-and-conditions" className="py-2 hover:text-blue-600 hover:underline">
                         Terms & Conditions
                     </Link>
                 </div>

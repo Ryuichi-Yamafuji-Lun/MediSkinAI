@@ -42,19 +42,19 @@ const HowItWorksSection = () => {
   }, []);
 
   return (
-    <div className="bg-slate-50 py-20 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="w-full bg-slate-50 py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-600">The Process</h2>
-          <p className="mt-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
             A Better Way to Check Your Skin
           </p>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">
             Our process is simple, secure, and designed to give you peace of mind in just three easy steps.
           </p>
         </div>
 
-        <div className="mt-16 space-y-20">
+        <div className="mt-12 sm:mt-16 space-y-14 sm:space-y-20">
           {steps.map((step, index) => (
             <div
               key={step.stepNumber}
@@ -68,6 +68,7 @@ const HowItWorksSection = () => {
                 <img
                   src={step.image}
                   alt={step.alt}
+                  loading="lazy"
                   className="w-full rounded-xl shadow-lg ring-1 ring-slate-900/10"
                 />
               </div>
@@ -75,12 +76,12 @@ const HowItWorksSection = () => {
               {/* Text Content */}
               <div className="w-full lg:w-1/2">
                 <div className="flex items-center gap-4">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white">
+                  <span className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-blue-600 text-lg sm:text-xl font-bold text-white">
                     {step.stepNumber}
                   </span>
-                  <h3 className="text-2xl font-bold tracking-tight text-slate-800">{step.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">{step.title}</h3>
                 </div>
-                <p className="mt-4 text-lg text-slate-600">{step.description}</p>
+                <p className="mt-4 text-base sm:text-lg text-slate-600">{step.description}</p>
               </div>
             </div>
           ))}
