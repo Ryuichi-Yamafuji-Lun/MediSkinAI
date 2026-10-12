@@ -86,9 +86,8 @@ const AboutUsPage = () => {
                         . Most skin cancers are very treatable when caught early, yet many people put off getting a new or changing spot checked.
                     </p>
                     <p className="mt-4 text-base sm:text-lg text-gray-600">
-                        My family has a history of skin cancer. I built MediSkinAI to explore how AI could help more people notice a worrying spot early and take the next step of seeing a professional.
+                        MediSkinAI started as a personal project, inspired by a family history of skin cancer, to explore how AI could help more people notice a worrying spot early and take the next step of seeing a professional.
                     </p>
-                    <p className="mt-4 text-base text-gray-500">Ryuichi Lun, creator</p>
                 </section>
 
                 {/* How the model works */}

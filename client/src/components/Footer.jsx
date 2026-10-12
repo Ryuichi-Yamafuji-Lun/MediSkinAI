@@ -29,7 +29,7 @@ const Footer = () => {
 
                 {/* Credit */}
                 <p className="text-sm text-slate-600">
-                    &copy; {new Date().getFullYear()} MediSkinAI · Built by Ryuichi Lun ·{" "}
+                    &copy; {new Date().getFullYear()} MediSkinAI ·{" "}
                     <a href="https://github.com/Ryuichi-Yamafuji-Lun/MediSkinAI" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-600">
                         GitHub
                     </a>{" "}

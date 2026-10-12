@@ -3,7 +3,7 @@ const CONTACT_EMAIL = "ryuichi.y.lun@gmail.com";
 const sections = [
     {
         title: "1. Who runs this site",
-        body: "MediSkinAI is a free educational project built and run by Ryuichi Lun. It is not a healthcare provider, and using it does not create a doctor-patient relationship.",
+        body: "MediSkinAI is a free, independent educational project. It is not a healthcare provider, and using it does not create a doctor-patient relationship.",
     },
     {
         title: "2. The photo you upload",
