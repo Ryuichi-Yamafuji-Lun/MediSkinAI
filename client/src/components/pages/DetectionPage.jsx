@@ -219,7 +219,7 @@ const DetectionPage = () => {
                 // response had no JSON body
             }
             if (response.status === 429) {
-                setErrorMessage("Too many analyses in a short time. Please wait a minute and try again.");
+                setErrorMessage("The analysis limit has been reached for now. Please try again later.");
             } else if ((response.status === 400 || response.status === 413) && typeof detail === "string") {
                 setErrorMessage(detail);
             } else {
