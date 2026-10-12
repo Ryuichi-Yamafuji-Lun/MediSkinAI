@@ -8,7 +8,8 @@ COPY ./requirements.txt .
 
 RUN pip install --no-cache-dir --target="/app/deps" -r requirements.txt
 
-FROM gcr.io/distroless/python3-debian12
+# nonroot: the server never needs root, so a compromise gets an unprivileged user
+FROM gcr.io/distroless/python3-debian12:nonroot
 
 WORKDIR /app
 

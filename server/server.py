@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 import logging
+from contextlib import asynccontextmanager
 import util
 from agent import mediskinai_graph_app
 
@@ -26,7 +27,20 @@ def get_client_ip(request: Request) -> str:
 # in-memory per instance, which is enough to stop one client hammering the model
 limiter = Limiter(key_func=get_client_ip)
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        logger.info("⏳ Attempting to load artifacts...")
+        util.load_artifacts()
+        logger.info("✅ Artifacts loaded successfully!")
+    except Exception as e:
+        logger.error(f"🔥 CRITICAL STARTUP ERROR: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -36,22 +50,12 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://mediskinai.vercel.app",
-    ], 
-    allow_credentials=True,
-    allow_methods=["*"],  
-    allow_headers=["*"], 
+    ],
+    # no cookies or auth headers are used, so don't allow credentialed requests
+    allow_credentials=False,
+    allow_methods=["POST"],
+    allow_headers=["*"],
 )
-
-@app.on_event("startup")
-async def load_data():
-    try:
-        logger.info("⏳ Attempting to load artifacts...")
-        util.load_artifacts()
-        logger.info("✅ Artifacts loaded successfully!")
-    except Exception as e:
-        logger.error(f"🔥 CRITICAL STARTUP ERROR: {str(e)}")
-        import traceback
-        logger.error(traceback.format_exc())
 
 @app.post("/detect_skin_lesion")
 @limiter.limit("10/minute")
