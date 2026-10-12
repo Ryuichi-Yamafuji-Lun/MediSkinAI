@@ -11,4 +11,5 @@ langchain
 langchain-google-genai
 langchain-core
 python-dotenv
+slowapi
 opencv-python-headless
