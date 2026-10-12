@@ -14,6 +14,8 @@ steps:
 #    - cpu-throttling: CPU billed only while a request is in flight
 #    - 1 vCPU / 2 GiB: the model peaks around 0.6 GB of memory
 #    - timeout 120s: matches the frontend's request timeout
+#    - service account with no project roles: a compromised container can't
+#      create resources or touch anything else in the project
 #    Env vars (GOOGLE_API_KEY) are kept from the existing service.
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
@@ -40,6 +42,8 @@ steps:
   - '--cpu-boost'
   - '--timeout'
   - '120'
+  - '--service-account'
+  - 'skin-lesion-runtime@$PROJECT_ID.iam.gserviceaccount.com'
 
 images:
 - 'gcr.io/$PROJECT_ID/skin-lesion-service:$BUILD_ID'
