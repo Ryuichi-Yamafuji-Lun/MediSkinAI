@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // --- SVG Icons for visual feedback ---
@@ -15,23 +15,37 @@ const ExclamationTriangleIcon = () => (
 );
 
 
+// Fall back to the last result saved by DetectionPage so a refresh
+// (e.g. pull-to-refresh on mobile) doesn't throw the result away.
+const getStoredResult = () => {
+    try {
+        return JSON.parse(sessionStorage.getItem("lastResult"));
+    } catch {
+        return null;
+    }
+};
+
 const ResultPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const result = location.state;
+    const [result] = useState(() => location.state ?? getStoredResult());
+    const isValid =
+        result &&
+        typeof result.classification === "string" &&
+        Number.isFinite(result.confidence);
 
     useEffect(() => {
-        if (!result) {
-            navigate("/detection");
+        if (!isValid) {
+            navigate("/detection", { replace: true });
         }
-    }, [result, navigate]);
+    }, [isValid, navigate]);
 
-    if (!result) {
+    if (!isValid) {
         return null;
     }
 
-    // Deconstruct the new state keys: classification and explanation
-    const { classification, confidence, explanation } = result;
+    const { classification, explanation } = result;
+    const confidence = Math.min(100, Math.max(0, result.confidence));
     const isMalignant = classification.toLowerCase() === "malignant";
     const confidencePercent = confidence.toFixed(2);
 
@@ -41,15 +55,15 @@ const ResultPage = () => {
         bgColor: "bg-amber-50",
         ringColor: "ring-amber-200",
         icon: <ExclamationTriangleIcon />,
-        title: "Analysis Suggests a High-Risk Classification",
-        advice: "A classification of 'Malignant' means the AI has identified characteristics that require a professional medical evaluation.",
+        title: "Flagged for a closer look",
+        advice: "The model found features it associates with malignant lesions. This is a screening estimate, not a diagnosis. Please book an appointment with a dermatologist to have the spot examined.",
     } : {
         primaryColor: "text-green-600",
         bgColor: "bg-green-50",
         ringColor: "ring-green-200",
         icon: <CheckCircleIcon />,
-        title: "Analysis Suggests a Low-Risk Classification",
-        advice: "A classification of 'Benign' indicates the lesion is likely non-cancerous. It is always best to monitor your skin for any changes.",
+        title: "No high-risk pattern detected",
+        advice: "The model did not find features it associates with malignant lesions. It can still miss melanoma, so see a dermatologist if the spot is new, changing, itching or bleeding.",
     };
 
     const radius = 50;
@@ -57,45 +71,47 @@ const ResultPage = () => {
     const offset = circumference - (confidence / 100) * circumference;
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-100 p-4 sm:p-6">
+        <div className="flex justify-center px-4 py-6 sm:p-6 sm:py-12">
             <div className="bg-white shadow-xl rounded-lg w-full max-w-lg overflow-hidden">
                 {/* --- Result Header --- */}
                 <div className={`p-6 text-center ${theme.bgColor} ${theme.primaryColor}`}>
                     <div className="flex flex-col items-center gap-4">
                         {theme.icon}
-                        <h1 className="text-3xl font-bold text-slate-800">{theme.title}</h1>
-                        <p className="text-lg text-slate-600">{theme.advice}</p>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">{theme.title}</h1>
+                        <p className="text-base sm:text-lg text-slate-600">{theme.advice}</p>
                     </div>
                 </div>
 
-                <div className="p-6 sm:p-8 space-y-6">
+                <div className="p-5 sm:p-8 space-y-6">
                     {/* --- Confidence Gauge --- */}
                     <div className="flex flex-col sm:flex-row items-center justify-around gap-6">
-                        <div className="relative w-32 h-32 flex items-center justify-center">
+                        <div className="relative w-32 h-32 shrink-0 flex items-center justify-center">
                             <svg className="transform -rotate-90" width="100%" height="100%" viewBox="0 0 120 120">
-                                <circle cx="60" cy="60" r={radius} strokeWidth="10" className="text-slate-200" fill="transparent" />
+                                <circle cx="60" cy="60" r={radius} strokeWidth="10" stroke="currentColor" className="text-slate-200" fill="transparent" />
                                 <circle
-                                    cx="60" cy="60" r={radius} strokeWidth="10" fill="transparent"
+                                    cx="60" cy="60" r={radius} strokeWidth="10" stroke="currentColor" fill="transparent"
                                     className={`${theme.primaryColor} transition-all duration-1000 ease-out`}
                                     strokeDasharray={circumference}
                                     strokeDashoffset={offset}
                                     strokeLinecap="round"
                                 />
                             </svg>
-                            <span className="absolute text-2xl font-bold text-slate-700">{confidencePercent}%</span>
+                            <span className="absolute text-xl sm:text-2xl font-bold text-slate-700">{confidencePercent}%</span>
                         </div>
                         <div className="text-center sm:text-left">
-                            <p className="text-sm text-slate-500">AI Confidence Score</p>
-                            <p className="text-lg text-slate-600">The model is <span className="font-bold text-slate-800">{confidencePercent}%</span> confident in its assessment based on the provided image.</p>
+                            <p className="text-sm text-slate-500">Model confidence</p>
+                            <p className="text-base sm:text-lg text-slate-600">The model is <span className="font-bold text-slate-800">{confidencePercent}%</span> sure of its own label. This is not your chance of having cancer.</p>
                         </div>
                     </div>
                     
                     <hr/>
                     
                     {/* --- LLM Explanation Section --- */}
-                    <div className="p-6">
+                    <div>
                         <h2 className="text-xl font-semibold text-slate-800 mb-4">AI Assistant Explanation</h2>
-                        <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">{explanation}</p>
+                        <p className="text-slate-600 leading-relaxed whitespace-pre-wrap wrap-break-word">
+                            {explanation || "An explanation is not available right now. Please review the result above and consult a healthcare professional."}
+                        </p>
                     </div>
                     
                     <hr/>
@@ -117,8 +133,9 @@ const ResultPage = () => {
 
                     <div className="text-center">
                         <button
+                            type="button"
                             onClick={() => navigate("/detection")}
-                            className="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
+                            className="px-4 py-2 text-blue-600 font-semibold hover:text-blue-800 transition-colors"
                         >
                             Analyze Another Image
                         </button>
