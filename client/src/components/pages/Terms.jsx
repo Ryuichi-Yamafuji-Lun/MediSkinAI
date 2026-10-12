@@ -6,7 +6,7 @@ const TermsAndConditionsPage = () => {
             <div className="bg-blue-100 w-full py-10 sm:py-16 px-4 text-center">
                 <h1 className="text-3xl sm:text-5xl font-bold text-gray-800">Terms & Conditions</h1>
                 <p className="text-base sm:text-lg text-gray-600 mt-4">
-                    Last updated: December 2024
+                    Last updated: October 2026
                 </p>
             </div>
 
@@ -25,7 +25,7 @@ const TermsAndConditionsPage = () => {
 
                     <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">3. Image Upload and Use</h2>
                     <p className="text-base sm:text-lg text-gray-600">
-                        When you upload an image to our platform, it will be used solely for the purpose of analyzing skin lesions for potential cancer. Your image will be automatically deleted once the analysis is complete. We do not store or retain images after processing, and we do not share any user data unless required by law.
+                        When you upload an image, it is used only to screen the skin lesion it shows. The image is processed in memory and discarded once the result is returned. We do not store images or use them to train the model. See our Privacy Policy for exactly what is shared with the services we rely on.
                     </p>
 
                     <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">4. Limitations of Liability</h2>
@@ -35,7 +35,7 @@ const TermsAndConditionsPage = () => {
 
                     <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">5. Data Privacy</h2>
                     <p className="text-base sm:text-lg text-gray-600">
-                        We value your privacy. We do not collect any personal data other than the image you upload for analysis. Your image is processed in real-time and deleted immediately after use. Please refer to our Privacy Policy for more detailed information on how we handle your data.
+                        We value your privacy. Your image is processed in real time and discarded immediately after use. We also use Google Analytics to understand how the site is used. Please refer to our Privacy Policy for details on how we handle your data.
                     </p>
 
                     <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">6. Prohibited Uses</h2>
@@ -58,13 +58,11 @@ const TermsAndConditionsPage = () => {
                         These Terms and Conditions are governed by the laws of the United States. Any disputes arising out of or in connection with these Terms shall be resolved in accordance with applicable local laws.
                     </p>
 
-                    {/* <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">10. Contact Us</h2>
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">10. Contact Us</h2>
                     <p className="text-base sm:text-lg text-gray-600">
-                        If you have any questions or concerns regarding these Terms and Conditions, please contact us at:
+                        If you have any questions or concerns regarding these Terms and Conditions, please email{" "}
+                        <a href="mailto:ryuichi.y.lun@gmail.com" className="text-blue-600 underline break-all">ryuichi.y.lun@gmail.com</a>.
                     </p>
-                    <p className="text-lg text-gray-600 font-semibold">
-                        Email: <a href="mailto:contact@mediskinai.com" className="text-blue-600">contact@mediskinai.com</a>
-                    </p> */}
                 </div>
             </div>
         </div>

@@ -1,91 +1,70 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import MolePicture from "../../assets/Mole.jpeg";
-import UploadPicture from "../../assets/Upload.jpeg";
-import ResultPicture from "../../assets/Result.jpeg";
+import Icon from "../Icons";
 
 const steps = [
   {
     stepNumber: "01",
-    title: "Take a Picture",
-    description: "Simply take a clear, well-lit photo of the mole or skin area you want analyzed for the most accurate results.",
-    image: MolePicture,
-    alt: "A clear, close-up photo of a skin mole.",
-    aosAnimation: "fade-right", 
+    icon: "camera",
+    title: "Take a clear photo",
+    description: "Use good, even light and get close so the spot fills the frame. Keep it in focus and photograph one spot at a time.",
   },
   {
     stepNumber: "02",
-    title: "Upload the Photo",
-    description: "Securely upload your image to our platform. Our system is designed to protect your privacy throughout the process.",
-    image: UploadPicture,
-    alt: "A person uploading a photo from their smartphone to a cloud service.",
-    aosAnimation: "fade-left", 
+    icon: "upload",
+    title: "Upload it",
+    description: "Your photo is analyzed in memory and discarded as soon as the result is sent back. It is never saved.",
   },
   {
     stepNumber: "03",
-    title: "Get Your Results",
-    description: "Our AI model analyzes the image in moments and provides a detailed result, indicating if the lesion appears benign or shows signs that warrant further review.",
-    image: ResultPicture,
-    alt: "A medical professional reviewing analysis results on a tablet.",
-    aosAnimation: "fade-right",
+    icon: "document",
+    title: "Read your result",
+    description: "You get a benign or malignant screening estimate with a confidence score, plus a plain-language explanation and next steps.",
   },
 ];
 
 const HowItWorksSection = () => {
   useEffect(() => {
     AOS.init({
-      duration: 800, 
+      duration: 800,
       once: true,
-      offset: 100, 
+      offset: 100,
     });
   }, []);
 
   return (
     <div className="w-full bg-slate-50 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-base font-semibold leading-7 text-blue-600">The Process</h2>
+        <div className="text-center max-w-2xl mx-auto">
+          <h2 className="text-base font-semibold leading-7 text-blue-600">How it works</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-            A Better Way to Check Your Skin
+            Three steps, about a minute
           </p>
           <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">
-            Our process is simple, secure, and designed to give you peace of mind in just three easy steps.
+            No sign-up and nothing to install. It works in your phone or computer browser.
           </p>
         </div>
 
-        <div className="mt-12 sm:mt-16 space-y-14 sm:space-y-20">
+        <ol className="mt-12 sm:mt-16 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
           {steps.map((step, index) => (
-            <div
+            <li
               key={step.stepNumber}
-              data-aos={step.aosAnimation}
-              className={`flex flex-col items-center gap-8 lg:flex-row ${
-                index % 2 !== 0 ? "lg:flex-row-reverse" : ""
-              }`}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm ring-1 ring-slate-900/5"
             >
-              {/* Image Content */}
-              <div className="w-full lg:w-1/2">
-                <img
-                  src={step.image}
-                  alt={step.alt}
-                  loading="lazy"
-                  className="w-full rounded-xl shadow-lg ring-1 ring-slate-900/10"
-                />
+              <div className="flex items-center justify-between">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white">
+                  <Icon name={step.icon} className="w-6 h-6" />
+                </span>
+                <span className="text-sm font-semibold text-slate-300">{step.stepNumber}</span>
               </div>
-              
-              {/* Text Content */}
-              <div className="w-full lg:w-1/2">
-                <div className="flex items-center gap-4">
-                  <span className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-blue-600 text-lg sm:text-xl font-bold text-white">
-                    {step.stepNumber}
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">{step.title}</h3>
-                </div>
-                <p className="mt-4 text-base sm:text-lg text-slate-600">{step.description}</p>
-              </div>
-            </div>
+              <h3 className="mt-6 text-xl font-bold tracking-tight text-slate-800">{step.title}</h3>
+              <p className="mt-3 text-base text-slate-600">{step.description}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </div>
   );

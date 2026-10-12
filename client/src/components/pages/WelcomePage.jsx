@@ -1,17 +1,17 @@
 import WelcomeSection from "../section/WelcomeSection";
-import AboutSection from "../section/AboutSection";
 import HowItWorksSection from "../section/HowItWorksSection";
+import ScopeSection from "../section/ScopeSection";
 
 const WelcomePage = () => {
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center ">
+    <div className="flex flex-col items-center">
       {/* Welcome Section */}
       <WelcomeSection />
-      {/* Include About Section here */}
-      <AboutSection />
       {/* How it Works Section */}
       <HowItWorksSection />
+      {/* What it can and can't do */}
+      <ScopeSection />
     </div>
   );
 };

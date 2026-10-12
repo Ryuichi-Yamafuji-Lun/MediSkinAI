@@ -55,15 +55,15 @@ const ResultPage = () => {
         bgColor: "bg-amber-50",
         ringColor: "ring-amber-200",
         icon: <ExclamationTriangleIcon />,
-        title: "Analysis Suggests a High-Risk Classification",
-        advice: "A classification of 'Malignant' means the AI has identified characteristics that require a professional medical evaluation.",
+        title: "Flagged for a closer look",
+        advice: "The model found features it associates with malignant lesions. This is a screening estimate, not a diagnosis. Please book an appointment with a dermatologist to have the spot examined.",
     } : {
         primaryColor: "text-green-600",
         bgColor: "bg-green-50",
         ringColor: "ring-green-200",
         icon: <CheckCircleIcon />,
-        title: "Analysis Suggests a Low-Risk Classification",
-        advice: "A classification of 'Benign' indicates the lesion is likely non-cancerous. It is always best to monitor your skin for any changes.",
+        title: "No high-risk pattern detected",
+        advice: "The model did not find features it associates with malignant lesions. It can still miss melanoma, so see a dermatologist if the spot is new, changing, itching or bleeding.",
     };
 
     const radius = 50;
@@ -99,8 +99,8 @@ const ResultPage = () => {
                             <span className="absolute text-xl sm:text-2xl font-bold text-slate-700">{confidencePercent}%</span>
                         </div>
                         <div className="text-center sm:text-left">
-                            <p className="text-sm text-slate-500">AI Confidence Score</p>
-                            <p className="text-base sm:text-lg text-slate-600">The model is <span className="font-bold text-slate-800">{confidencePercent}%</span> confident in its assessment based on the provided image.</p>
+                            <p className="text-sm text-slate-500">Model confidence</p>
+                            <p className="text-base sm:text-lg text-slate-600">The model is <span className="font-bold text-slate-800">{confidencePercent}%</span> sure of its own label. This is not your chance of having cancer.</p>
                         </div>
                     </div>
                     
