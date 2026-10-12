@@ -127,6 +127,30 @@ def test_site_wide_daily_cap(mock_classifier, mock_llm):
     assert statuses[300] == 429
 
 
+def test_rate_limit_uses_proxy_ip_from_separate_header_line(mock_classifier, mock_llm):
+    # attacker-controlled header first, proxy-added real IP as a second header line
+    for i in range(5):
+        headers = [("x-forwarded-for", f"198.18.0.{i}"), ("x-forwarded-for", "203.0.113.50")]
+        response = client.post(
+            "/detect_skin_lesion",
+            files={"file": ("t.jpg", make_image_bytes(), "image/jpeg")},
+            headers=headers,
+        )
+        assert response.status_code == 200
+    headers = [("x-forwarded-for", "198.18.0.99"), ("x-forwarded-for", "203.0.113.50")]
+    response = client.post(
+        "/detect_skin_lesion",
+        files={"file": ("t.jpg", make_image_bytes(), "image/jpeg")},
+        headers=headers,
+    )
+    assert response.status_code == 429
+
+
+def test_api_docs_are_not_public():
+    for path in ("/docs", "/redoc", "/openapi.json"):
+        assert client.get(path).status_code == 404
+
+
 def test_get_skin_lesion_with_real_model():
     util.load_artifacts()
 

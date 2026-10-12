@@ -16,11 +16,14 @@ MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 
 def get_client_ip(request: Request) -> str:
     # Behind Cloud Run every request comes from Google's proxy, so request.client.host
-    # would put all users in one bucket. Google appends the real client IP as the
-    # last X-Forwarded-For entry (earlier entries can be spoofed by the client).
-    forwarded = request.headers.get("x-forwarded-for")
-    if forwarded:
-        return forwarded.split(",")[-1].strip()
+    # would put all users in one bucket. Clients can send their own X-Forwarded-For,
+    # and the proxy adds the real IP after it, either appended to the same header or
+    # as a separate header line. headers.get() only returns the first line (the
+    # client-controlled one), so read every line and take the very last entry.
+    forwarded = ",".join(request.headers.getlist("x-forwarded-for"))
+    entries = [e.strip() for e in forwarded.split(",") if e.strip()]
+    if entries:
+        return entries[-1]
     return request.client.host if request.client else "unknown"
 
 
@@ -50,7 +53,8 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+# no public interactive docs: they hand anyone a ready-made client for the API
+app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
