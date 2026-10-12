@@ -24,8 +24,18 @@ def get_client_ip(request: Request) -> str:
     return request.client.host if request.client else "unknown"
 
 
-# in-memory per instance, which is enough to stop one client hammering the model
+# in-memory per instance; with max-instances=1 on Cloud Run these are effectively global
 limiter = Limiter(key_func=get_client_ip)
+
+# Cost guards. Per client: stops one person or bot hammering the model.
+# Site-wide: caps total model + Gemini calls no matter how many IPs are used,
+# which keeps usage inside Cloud Run's free tier. Raise if real traffic grows.
+PER_CLIENT_LIMIT = "5/minute;30/day"
+SITE_WIDE_DAILY_LIMIT = "300/day"
+
+
+def site_wide_key(request: Request) -> str:
+    return "site-wide"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -58,7 +68,8 @@ app.add_middleware(
 )
 
 @app.post("/detect_skin_lesion")
-@limiter.limit("10/minute")
+@limiter.limit(SITE_WIDE_DAILY_LIMIT, key_func=site_wide_key)
+@limiter.limit(PER_CLIENT_LIMIT)
 async def detect_skin_lesion(request: Request, file: UploadFile = File(...)):
     """
     Upload an image file to detect if skin lesion is cancer.

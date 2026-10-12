@@ -99,7 +99,7 @@ def test_llm_failure_still_returns_classification(mock_classifier, mock_llm):
 
 def test_rate_limit_is_per_client_ip(mock_classifier, mock_llm):
     first = {"X-Forwarded-For": "203.0.113.1"}
-    for _ in range(10):
+    for _ in range(5):
         assert post_image(make_image_bytes(), headers=first).status_code == 200
     assert post_image(make_image_bytes(), headers=first).status_code == 429
 
@@ -109,11 +109,22 @@ def test_rate_limit_is_per_client_ip(mock_classifier, mock_llm):
 
 
 def test_rate_limit_ignores_spoofed_forwarded_entries(mock_classifier, mock_llm):
-    for i in range(10):
+    for i in range(5):
         headers = {"X-Forwarded-For": f"10.0.0.{i}, 203.0.113.9"}
         assert post_image(make_image_bytes(), headers=headers).status_code == 200
     headers = {"X-Forwarded-For": "10.0.0.99, 203.0.113.9"}
     assert post_image(make_image_bytes(), headers=headers).status_code == 429
+
+
+def test_site_wide_daily_cap(mock_classifier, mock_llm):
+    with patch.object(server.limiter, "enabled", True):
+        # many different IPs, each well under the per-client limit
+        statuses = [
+            post_image(make_image_bytes(), headers={"X-Forwarded-For": f"198.51.{i // 250}.{i % 250}"}).status_code
+            for i in range(301)
+        ]
+    assert statuses[:300] == [200] * 300
+    assert statuses[300] == 429
 
 
 def test_get_skin_lesion_with_real_model():
