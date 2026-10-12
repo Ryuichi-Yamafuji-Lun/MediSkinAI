@@ -68,7 +68,12 @@ def llm_reasoning_node(state: GraphState):
     ])
 
     prompt = template.format_prompt(classification=classification, confidence=confidence)
-    explanation = llm.invoke(prompt)
+    try:
+        explanation = llm.invoke(prompt)
+    except Exception as e:
+        # still return the CNN result if the LLM call fails (quota, timeout, outage)
+        print(f"LLM invocation failed: {e}")
+        return {"explanation": "We couldn't generate a detailed explanation right now. Please consult a qualified healthcare professional about this result."}
     return {"explanation": explanation.content}
 
 # create instance of StateGraph

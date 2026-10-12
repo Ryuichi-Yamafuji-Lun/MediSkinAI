@@ -32,6 +32,8 @@ def get_skin_lesion(image_bytes: bytes):
 
     # Create an in-memory file from the binary data
     image_file = io.BytesIO(image_bytes) 
+    image = None
+    input_tensor = None
 
     try:
         image = Image.open(image_file).convert("RGB")
@@ -59,6 +61,8 @@ def get_skin_lesion(image_bytes: bytes):
         return {"classification": classification, "confidence": confidence}
     
     finally:
+        # image/input_tensor stay None if decoding failed, so these can't raise
+        # and hide the original error
         image_file.close()  # Close the file
         del image  # Remove the image from memory
         del input_tensor  # Clear transformed data
