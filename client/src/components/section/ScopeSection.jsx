@@ -23,7 +23,7 @@ const ScopeSection = () => (
     </div>
 
     <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm ring-1 ring-slate-900/5">
+      <div className="rounded-2xl bg-white p-6 sm:p-8 shadow-xs ring-1 ring-slate-900/5">
         <h3 className="text-lg font-semibold text-slate-800">What it does</h3>
         <ul className="mt-4 space-y-3">
           {does.map((item) => (
@@ -34,7 +34,7 @@ const ScopeSection = () => (
           ))}
         </ul>
       </div>
-      <div className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm ring-1 ring-slate-900/5">
+      <div className="rounded-2xl bg-white p-6 sm:p-8 shadow-xs ring-1 ring-slate-900/5">
         <h3 className="text-lg font-semibold text-slate-800">What it can&apos;t do</h3>
         <ul className="mt-4 space-y-3">
           {doesNot.map((item) => (

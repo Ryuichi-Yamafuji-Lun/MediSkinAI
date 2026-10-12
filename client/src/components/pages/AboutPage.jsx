@@ -96,7 +96,7 @@ const AboutUsPage = () => {
                         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">How the model works</h2>
                         <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
                             {modelFacts.map((fact) => (
-                                <div key={fact.title} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5" data-aos="fade-up">
+                                <div key={fact.title} className="rounded-2xl bg-white p-6 shadow-xs ring-1 ring-slate-900/5" data-aos="fade-up">
                                     <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white">
                                         <Icon name={fact.icon} />
                                     </span>

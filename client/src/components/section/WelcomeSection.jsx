@@ -71,7 +71,7 @@ const WelcomeSection = () => {
                     <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-x-6 lg:justify-start">
                         <Link
                             to="/detection"
-                            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-200"
+                            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-xs hover:bg-blue-700 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-200"
                         >
                             Check a Photo
                             <Icon name="arrowRight" className="w-5 h-5" />

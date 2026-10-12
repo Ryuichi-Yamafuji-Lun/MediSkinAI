@@ -109,7 +109,7 @@ const ResultPage = () => {
                     {/* --- LLM Explanation Section --- */}
                     <div>
                         <h2 className="text-xl font-semibold text-slate-800 mb-4">AI Assistant Explanation</h2>
-                        <p className="text-slate-600 leading-relaxed whitespace-pre-wrap break-words">
+                        <p className="text-slate-600 leading-relaxed whitespace-pre-wrap wrap-break-word">
                             {explanation || "An explanation is not available right now. Please review the result above and consult a healthcare professional."}
                         </p>
                     </div>

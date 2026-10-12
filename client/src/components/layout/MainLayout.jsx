@@ -19,12 +19,12 @@ const MainLayout = ({ children }) => {
     return (
         // overflow-x-clip stops AOS slide-in animations from causing sideways scroll on mobile
         // (overflow-hidden would break the sticky navbar)
-        <div className="min-h-screen min-h-[100dvh] flex flex-col overflow-x-clip bg-blue-100">
+        <div className="min-h-screen min-h-dvh flex flex-col overflow-x-clip bg-blue-100">
             {/* Navbar */}
             <NavBar isScrolled={isScrolled} />
 
             {/* Main Content */}
-            <main className="flex-grow">{children}</main>
+            <main className="grow">{children}</main>
 
             {/* Footer */}
             <Footer />

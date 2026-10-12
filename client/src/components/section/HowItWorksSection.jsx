@@ -52,7 +52,7 @@ const HowItWorksSection = () => {
               key={step.stepNumber}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm ring-1 ring-slate-900/5"
+              className="rounded-2xl bg-white p-6 sm:p-8 shadow-xs ring-1 ring-slate-900/5"
             >
               <div className="flex items-center justify-between">
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white">

@@ -5,7 +5,7 @@ const CONTACT_EMAIL = "ryuichi.y.lun@gmail.com";
 const Footer = () => {
     return (
         <footer className="bg-gray-100 text-slate-700 py-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
-            <div className="max-w-screen-xl mx-auto px-4 text-center">
+            <div className="max-w-(--breakpoint-xl) mx-auto px-4 text-center">
                 {/* Legal Links */}
                 <nav aria-label="Footer" className="mb-6 flex flex-wrap justify-center gap-x-6 gap-y-2">
                     <Link to="/about" className="py-2 hover:text-blue-600 hover:underline">

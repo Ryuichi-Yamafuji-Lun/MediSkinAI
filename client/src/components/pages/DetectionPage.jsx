@@ -311,7 +311,7 @@ const DetectionPage = () => {
 
             {isCameraOpen && (
                 <div
-                    className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-[60] p-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
+                    className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-60 p-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
                     role="dialog"
                     aria-modal="true"
                     aria-label="Camera"
@@ -424,7 +424,7 @@ const DetectionPage = () => {
                         type="button"
                         onClick={handleUpload}
                         disabled={!file || processing}
-                        className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:shadow-none"
+                        className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/50 transition-all duration-200 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:shadow-none"
                     >
                         Upload and Analyze
                     </button>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const TermsModal = ({ onAgree }) => {
     return (
         <div
-            className="fixed inset-0 z-[70] bg-gray-800/75 flex justify-center items-center p-4"
+            className="fixed inset-0 z-70 bg-gray-800/75 flex justify-center items-center p-4"
             role="dialog"
             aria-modal="true"
             aria-labelledby="terms-modal-title"

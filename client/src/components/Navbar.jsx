@@ -79,7 +79,7 @@ const NavBar = ({ isScrolled }) => {
                 ))}
                 <NavLink
                     to="/detection"
-                    className="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 shadow-sm transition-all duration-200"
+                    className="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 shadow-xs transition-all duration-200"
                 >
                     Start Detection
                 </NavLink>
@@ -97,7 +97,7 @@ const NavBar = ({ isScrolled }) => {
                 <div className="w-6 h-5 flex flex-col justify-between">
                     <span className={`block h-0.5 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? "rotate-45 translate-y-[9px]" : ""}`} />
                     <span className={`block h-0.5 bg-current transition duration-300 ease-in-out ${isMenuOpen ? "opacity-0" : ""}`} />
-                    <span className={`block h-0.5 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? "-rotate-45 -translate-y-[9px]" : ""}`} />
+                    <span className={`block h-0.5 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? "-rotate-45 translate-y-[-9px]" : ""}`} />
                 </div>
             </button>
 
@@ -106,7 +106,7 @@ const NavBar = ({ isScrolled }) => {
                 id="mobile-menu"
                 aria-hidden={!isMenuOpen}
                 inert={isMenuOpen ? undefined : ""}
-                className={`fixed inset-0 h-screen h-[100dvh] bg-white transform transition-transform duration-300 ease-in-out md:hidden ${
+                className={`fixed inset-0 h-screen h-dvh bg-white transform transition-transform duration-300 ease-in-out md:hidden ${
                     isMenuOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
             >
