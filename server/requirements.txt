@@ -1,6 +1,6 @@
 torch
 torchvision
-pillow==12.3.0
+pillow==13.0.0
 fastapi==0.143.0
 # floor keeps starlette past the 2026 security advisories
 starlette>=1.3.1
