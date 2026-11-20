@@ -1,7 +1,7 @@
 # 🧠 MediSkinAI
 
 ## 🔗 Live Demo  
-👉 [https://mediskinai.vercel.app/](https://mediskinai.vercel.app/)
+Retired in November 2026. The code and trained model weights are in this repo.
 
 ---
 
